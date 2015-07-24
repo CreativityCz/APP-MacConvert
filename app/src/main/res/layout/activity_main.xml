@@ -1,0 +1,143 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/LinearLayout1"
+        >
+
+        <TextView
+            android:id="@+id/macstart"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="10pt"
+            android:text="起始MAC地址"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/zerox"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="10pt"
+                android:text="0x"/>
+
+            <EditText
+                android:id="@+id/edit_text1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/dr_edittext"
+                android:hint="请输入.." />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mtnum"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="10pt"
+            android:text="机器数量"/>
+        <EditText
+            android:id="@+id/edit_text2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/dr_edittext"
+            android:hint="请输入.." />
+
+        <TextView
+            android:id="@+id/macnumsperm"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="10pt"
+            android:text="Mac地址数量/机器"/>
+        <EditText
+            android:id="@+id/edit_text3"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/dr_edittext"
+            android:hint="请输入.." />
+    </LinearLayout >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/LinearLayout2"
+        android:layout_below="@id/LinearLayout1">
+
+        <TextView
+            android:id="@+id/macEnd"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:textSize="10pt"
+            android:text="末端MAC地址："/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#864"
+            android:text="计算"
+            android:onClick="getResult" />
+
+    </LinearLayout >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/LinearLayout3"
+        android:layout_below="@id/LinearLayout2">
+        <TextView
+            android:id="@+id/textview_macEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="" />
+        <Button
+            android:id="@+id/cleardata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clearData"
+            android:background="#864"
+            android:text="清除" />
+    </LinearLayout>>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LinearLayout3"
+        android:id="@+id/gridlt"
+        android:rowCount="4"
+        android:columnCount="4"
+        >
+
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/powered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Copyright@2015-2020 Yw,Cz"/>
+</RelativeLayout>
