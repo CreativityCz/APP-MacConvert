@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">MacConvert</string>
+    <string name="app_name">Mac</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="Copyright">Copyright@2015-2020 Yw,Cz</string>
     <string name="action_settings">关于</string>
+
 </resources>
