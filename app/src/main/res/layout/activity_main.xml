@@ -36,7 +36,7 @@
 
             <EditText
                 android:id="@+id/edit_text1"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/dr_edittext"
                 android:textCursorDrawable="@drawable/cursor_color"
@@ -52,7 +52,7 @@
         <!--第4行 -->
         <EditText
             android:id="@+id/edit_text2"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
@@ -71,7 +71,7 @@
         <!--第6行 -->
         <EditText
             android:id="@+id/edit_text3"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"

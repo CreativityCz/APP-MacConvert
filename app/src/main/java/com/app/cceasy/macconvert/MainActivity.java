@@ -155,20 +155,20 @@ public class MainActivity extends AppCompatActivity {
         try{
             macStart = Long.parseLong(edit_text1.getText().toString(),16);
         }catch (Exception e){
-            edit_text1.setError("输入有误");
+            edit_text1.setError("输入有误:输入过多");
             return;
         }
 
         try{
             num1 = Long.parseLong(edit_text2.getText().toString(),10);
         }catch (Exception e){
-            edit_text2.setError("输入有误");
+            edit_text2.setError("输入有误：输入过多");
             return;
         }
         try{
             num2 = Long.parseLong(edit_text3.getText().toString(),10);
         }catch (Exception e){
-            edit_text3.setError("输入有误");
+            edit_text3.setError("输入有误：输入过多");
             return;
         }
         //得出结果并打印
