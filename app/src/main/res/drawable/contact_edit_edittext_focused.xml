@@ -6,8 +6,8 @@
     <corners android:radius="3dip"/>
     <!-- 描边 -->
     <stroke
-        android:width="1dip"
-        android:color="#961" />
+        android:width="3dip"
+        android:color="#bda533" />
 
     <!-- 大小
     <size
