@@ -1,17 +1,20 @@
 package com.app.cceasy.macconvert;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
+
+import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,21 +27,35 @@ public class MainActivity extends AppCompatActivity {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /** ======== 输入框初始化 ===========*/
+        /**：
+         * 1、EditText 输入框初始化
+         *      EditText屏蔽软键盘弹出--光标依然能闪动
+         *      edit_text2、edit_text3 输入框只允许输入数字
+         *      EditText失去焦点时，马上去掉错误提示消息标志
+         * 2、GridLayout网格布局 ：：将16个键盘button填入
+         */
+        //------------>
+
+        /** ========EditText 输入框初始化 ===========*/
         EditText edit_text1 = (EditText) findViewById(R.id.edit_text1);
         EditText edit_text2 = (EditText) findViewById(R.id.edit_text2);
         EditText edit_text3 = (EditText) findViewById(R.id.edit_text3);
-        edit_text1.setInputType(InputType.TYPE_NULL); //屏蔽软键盘弹出
-        edit_text2.setInputType(InputType.TYPE_NULL); //屏蔽软键盘弹出
-        edit_text3.setInputType(InputType.TYPE_NULL); //屏蔽软键盘弹出
-        //edit_text3.setInputType(InputType.TYPE_CLASS_NUMBER);
+        //EditText屏蔽软键盘弹出--光标依然能闪动
+        hideSoftInputMethod(edit_text1);
+        hideSoftInputMethod(edit_text2);
+        hideSoftInputMethod(edit_text3);
+        //edit_text2、edit_text3 输入框只允许输入数字
+        edit_text2.setInputType(InputType.TYPE_CLASS_NUMBER);
+        edit_text3.setInputType(InputType.TYPE_CLASS_NUMBER);
+        //EditText失去焦点时，马上去掉错误提示消息标志
         edit_text1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                EditText edit_text1 = (EditText) findViewById(R.id.edit_text1);
+                EditText edit_text1 =  (EditText) findViewById(v.getId());
                 if(hasFocus){
 
                 }else {
@@ -49,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         edit_text2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                EditText edit_text2 = (EditText) findViewById(R.id.edit_text2);
+                EditText edit_text2 = (EditText) findViewById(v.getId());
                 if(hasFocus){
 
                 }else {
@@ -60,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         edit_text3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                EditText edit_text3 = (EditText) findViewById(R.id.edit_text3);
+                EditText edit_text3 = (EditText) findViewById(v.getId());
                 if(hasFocus){
 
                 }else {
@@ -69,14 +86,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /**===== 将16个键盘button填入gridLayout网格布局   =======*/
+        /**===== GridLayout网格布局 ：：将16个键盘button填入=======*/
         gridLayout = (GridLayout) findViewById(R.id.gridlt);
         for(int i=0;i<16;i++){
             Button bn = new Button(this);
             bn.setText(strs[i]);
+            //一定要设置Id，因为后面有调用到ID，v.getID()。（否则会有异常-找不到ID）
             bn.setId(i);
             bn.setTextSize(20);
-            bn.setWidth(180);
+            bn.setBackgroundResource(R.drawable.keyboardbutton_shape);
+            bn.setWidth(175);
             bn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -90,28 +109,18 @@ public class MainActivity extends AppCompatActivity {
                     //
                     if (edit_text1.isFocused()) {
                         try {
-                            Long.parseLong(b.getText().toString(), 16);  //检查是否可转化为十进制，即检查输入是否是十进制数
+                            Long.parseLong(b.getText().toString(), 16);  //检查是否可转化为十六进制，即检查输入是否是十六进制数
                             edit_text1.append(b.getText());//内容追加
                             edit_text1.setError(null);//清除错误消息框
                         } catch (Exception e) {
                             edit_text1.setError("请输入0~~F之内的十六进制数.");
                         }
-                    } else if (edit_text2.isFocused()) {
-                        try {
-                            Long.parseLong(b.getText().toString(), 10);  //检查是否可转化为十进制，即检查输入是否是十进制数
-                            edit_text2.append(b.getText());
-                            edit_text2.setError(null);
-                        } catch (Exception e) {
-                            edit_text2.setError("请输入0~9之内的十进制数.");
-                        }
+                    }else if (edit_text2.isFocused()) {
+                        edit_text2.append(b.getText());
+                        edit_text2.setError(null);
                     } else if (edit_text3.isFocused()) {
-                        try {
-                            Long.parseLong(b.getText().toString(), 10);  //检查是否可转化为十进制，即检查输入是否是十进制数
-                            edit_text3.append(b.getText());
-                            edit_text3.setError(null);
-                        } catch (Exception e) {
-                            edit_text3.setError("请输入0~9之内的十进制数.");
-                        }
+                        edit_text3.append(b.getText());
+                        edit_text3.setError(null);
                     }
                 }
             });
@@ -138,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
 
         //对所有输入框的文本内容进行检查--是否为空
         if("".equals(edit_text1.getText().toString())){
-
             edit_text1.setError("请输入内容");
             return;
         }else if("".equals(edit_text2.getText().toString())){
@@ -194,6 +202,39 @@ public class MainActivity extends AppCompatActivity {
         edit_text2.setError(null);
         edit_text3.setError(null);
 
+    }
+
+
+    /** ==== 隐藏系统键盘 ======*/
+    //用这个方法关闭系统键盘就不会出现光标消失的问题了
+    public void hideSoftInputMethod(EditText ed){
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        String methodName = null;
+        int currentVersion = android.os.Build.VERSION.SDK_INT;
+        if(currentVersion >= 16){
+            // 4.2
+            methodName = "setShowSoftInputOnFocus";  //
+        }else if(currentVersion >= 14){
+            // 4.0
+            methodName = "setSoftInputShownOnFocus";
+        }
+
+        if(methodName == null){
+            //最低级最不济的方式，这个方式会把光标给屏蔽
+            ed.setInputType(InputType.TYPE_NULL);
+        }else{
+            Class<EditText> cls = EditText.class;
+            Method setShowSoftInputOnFocus;
+            try {
+                setShowSoftInputOnFocus = cls.getMethod(methodName, boolean.class);
+                setShowSoftInputOnFocus.setAccessible(true);
+                setShowSoftInputOnFocus.invoke(ed, false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

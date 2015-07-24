@@ -37,10 +37,11 @@
             <EditText
                 android:id="@+id/edit_text1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:background="@drawable/dr_edittext"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:hint="请输入.." />
+                android:textCursorDrawable="@null"
+                android:cursorVisible="true"
+                android:hint="请输入...                " />
         </LinearLayout>
         <!--第3行 -->
         <TextView
@@ -53,14 +54,15 @@
         <EditText
             android:id="@+id/edit_text2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="25dp"
             android:background="@drawable/dr_edittext"
             android:textCursorDrawable="@null"
-            android:hint="请输入.." />
+            android:cursorVisible="true"
+            android:hint="请输入...                " />
         <!--第5行 -->
         <TextView
             android:id="@+id/macnumsperm"
@@ -72,7 +74,7 @@
         <EditText
             android:id="@+id/edit_text3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
@@ -80,32 +82,33 @@
             android:background="@drawable/dr_edittext"
             android:textCursorDrawable="@null"
             android:cursorVisible="true"
-            android:hint="请输入.."
+            android:hint="请输入...                "
             />
         <!--第7行 -->
         <LinearLayout
+            android:id="@+id/LinearLayout02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/LinearLayout02" >
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/macEnd"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:textSize="10pt"
                 android:text="末端MAC地址："/>
 
             <Button
                 android:layout_width="80dp"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@drawable/button_shape"
                 android:textSize="10pt"
-                android:textColor="@android:color/holo_orange_light"
+                android:textColor="@android:color/black"
                 android:text="计算"
                 android:onClick="getResult" />
-
         </LinearLayout >
         <!--第8行 -->
         <LinearLayout
@@ -124,11 +127,11 @@
             <Button
                 android:id="@+id/cleardata"
                 android:layout_width="80dp"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:onClick="clearData"
                 android:background="@drawable/button_shape"
                 android:textSize="10pt"
-                android:textColor="@android:color/holo_orange_light"
+                android:textColor="@android:color/black"
                 android:text="重置" />
         </LinearLayout>
     </LinearLayout>
