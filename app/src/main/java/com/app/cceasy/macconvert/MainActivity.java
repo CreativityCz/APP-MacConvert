@@ -1,10 +1,16 @@
 package com.app.cceasy.macconvert;
+/**以后的大版本号更新基于以下需求，或重大bug
+ * 需求：1、增加退格-----更改布局 ---OK--version 1.1  --2015-7-25
+ *      2、增加setting--右上角
+ *      3、增加分享------分享计算结果至QQ好友或电脑
+ * */
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +21,7 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Method;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -130,7 +137,35 @@ public class MainActivity extends AppCompatActivity {
             //将键盘体填入网格布局
             gridLayout.addView(bn, params);
         }
+    }
 
+    /**----- 退格 ----------------------*/
+    public void backGrid(View view){
+        EditText edit_text1 = (EditText) findViewById(R.id.edit_text1);
+        EditText edit_text2 = (EditText) findViewById(R.id.edit_text2);
+        EditText edit_text3 = (EditText) findViewById(R.id.edit_text3);
+        if (edit_text1.isFocused()) {
+            //动作按下
+            int action = KeyEvent.ACTION_DOWN;
+            //code:删除，其他code也可以，例如 code = 0
+            int code = KeyEvent.KEYCODE_DEL;
+            KeyEvent event = new KeyEvent(action, code);
+            edit_text1.onKeyDown(KeyEvent.KEYCODE_DEL, event); //抛给系统处理了
+        }else if (edit_text2.isFocused()) {
+            //动作按下
+            int action = KeyEvent.ACTION_DOWN;
+            //code:删除，其他code也可以，例如 code = 0
+            int code = KeyEvent.KEYCODE_DEL;
+            KeyEvent event = new KeyEvent(action, code);
+            edit_text2.onKeyDown(KeyEvent.KEYCODE_DEL, event); //抛给系统处理了
+        } else if (edit_text3.isFocused()) {
+            //动作按下
+            int action = KeyEvent.ACTION_DOWN;
+            //code:删除，其他code也可以，例如 code = 0
+            int code = KeyEvent.KEYCODE_DEL;
+            KeyEvent event = new KeyEvent(action, code);
+            edit_text3.onKeyDown(KeyEvent.KEYCODE_DEL, event); //抛给系统处理了
+        }
     }
 
     /**----- 计算末端MAC地址 ------------*/
@@ -148,12 +183,18 @@ public class MainActivity extends AppCompatActivity {
         //对所有输入框的文本内容进行检查--是否为空
         if("".equals(edit_text1.getText().toString())){
             edit_text1.setError("请输入内容");
+            //获取焦点--让用户可以直接输入---更加人性化
+            edit_text1.requestFocus();
             return;
         }else if("".equals(edit_text2.getText().toString())){
             edit_text2.setError("请输入内容");
+            //获取焦点--让用户可以直接输入---更加人性化
+            edit_text2.requestFocus();
             return;
         }else if("".equals(edit_text3.getText().toString())){
             edit_text3.setError("请输入内容");
+            //获取焦点--让用户可以直接输入---更加人性化
+            edit_text3.requestFocus();
             return;
         }
         //对所有输入框的 文本内容 进行检查--内容是否合格

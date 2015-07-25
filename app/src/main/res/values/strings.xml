@@ -4,4 +4,14 @@
     <string name="Copyright">Copyright@2015-2020 Yw,Cz</string>
     <string name="action_settings">关于</string>
 
+    <string name="MacAddressStart">起始MAC地址</string>
+    <string name="machineNum">机器数量</string>
+    <string name="macNumPerMachine">MAC地址数量/机器</string>
+    <string name="MacAddressEnd">末端MAC地址</string>
+
+    <string name="Pleaseinput">请输入...</string>
+
+    <string name="Backspace">退格</string>
+    <string name="Count">计算</string>
+    <string name="Reset">重置</string>
 </resources>

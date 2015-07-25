@@ -5,7 +5,9 @@
     android:layout_margin="5dp"
     android:gravity="center_horizontal">
 
-    <!--线性布局-垂直-->
+
+
+    <!--线性布局-垂直：共4行 -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -14,143 +16,177 @@
         android:id="@+id/LinearLayout0"
         >
         <!--第1行 -->
-        <TextView
-            android:id="@+id/macstart"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textSize="10pt"
-            android:text="起始MAC地址"/>
-        <!--第2行 -->
-        <LinearLayout
-            android:id="@+id/LinearLayout01"
+        <RelativeLayout
+            android:id="@+id/line1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp">
+            android:layout_height="35dp"
+            android:layout_margin="5dp"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/macstart"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="10pt"
+                android:text="@string/MacAddressStart"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:id="@+id/edit_text1"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_edittext"
+                android:textCursorDrawable="@null"
+                android:cursorVisible="true"
+                android:hint="@string/Pleaseinput" />
+
             <TextView
                 android:id="@+id/zerox"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_toLeftOf="@id/edit_text1"
+                android:layout_centerVertical="true"
                 android:textSize="10pt"
                 android:text="0x"/>
-
-            <EditText
-                android:id="@+id/edit_text1"
+        </RelativeLayout>
+        <!--第2行 -->
+        <!--用相对布局，可以让里面的控件，一个靠左，一个靠右
+            而线性布局里面的控件要么只能全部靠左，要么只能全部靠右-->
+        <RelativeLayout
+            android:id="@+id/line2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_margin="5dp" >
+            <TextView
+                android:id="@+id/machineNum"
+                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="10pt"
+                android:text="@string/machineNum"/>
+            <EditText
+                android:id="@+id/edit_text2"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/dr_edittext"
                 android:textCursorDrawable="@null"
                 android:cursorVisible="true"
-                android:hint="请输入...                " />
-        </LinearLayout>
+                android:hint="@string/Pleaseinput" />
+        </RelativeLayout>
+
         <!--第3行 -->
-        <TextView
-            android:id="@+id/mtnum"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="10pt"
-            android:text="机器数量"/>
-        <!--第4行 -->
-        <EditText
-            android:id="@+id/edit_text2"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="25dp"
-            android:background="@drawable/dr_edittext"
-            android:textCursorDrawable="@null"
-            android:cursorVisible="true"
-            android:hint="请输入...                " />
-        <!--第5行 -->
-        <TextView
-            android:id="@+id/macnumsperm"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="10pt"
-            android:text="Mac地址数量/机器"/>
-        <!--第6行 -->
-        <EditText
-            android:id="@+id/edit_text3"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="25dp"
-            android:background="@drawable/dr_edittext"
-            android:textCursorDrawable="@null"
-            android:cursorVisible="true"
-            android:hint="请输入...                "/>
-        <!--第7行 -->
-        <LinearLayout
-            android:id="@+id/LinearLayout02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/line3"
             android:orientation="horizontal"
-            android:layout_marginBottom="5dp">
-
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_margin="5dp" >
             <TextView
-                android:id="@+id/macEnd"
+                android:id="@+id/macNumPerMachine"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="10pt"
+                android:text="@string/macNumPerMachine"/>
+            <EditText
+                android:id="@+id/edit_text3"
+                android:layout_width="140dp"
                 android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textSize="10pt"
-                android:text="末端MAC地址："/>
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_edittext"
+                android:textCursorDrawable="@null"
+                android:cursorVisible="true"
+                android:hint="@string/Pleaseinput"/>
+        </RelativeLayout>
 
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button_shape"
-                android:textSize="10pt"
-                android:textColor="@android:color/black"
-                android:text="计算"
-                android:onClick="getResult" />
-        </LinearLayout >
-        <!--第8行 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <!--第4行 -->
+        <RelativeLayout
+            android:id="@+id/line4"
             android:orientation="horizontal"
-            android:id="@+id/LinearLayout03" >
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_margin="5dp">
+            <TextView
+                android:id="@+id/MacAddressEnd"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="10pt"
+                android:text="@string/MacAddressEnd"  />
+
             <TextView
                 android:id="@+id/textview_macEnd"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="25dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/contact_edit_edittext_normal"
                 android:gravity="center_vertical"
                 android:hint="" />
-            <Button
-                android:id="@+id/cleardata"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:onClick="clearData"
-                android:background="@drawable/button_shape"
-                android:textSize="10pt"
-                android:textColor="@android:color/black"
-                android:text="重置" />
-        </LinearLayout>
+        </RelativeLayout >
     </LinearLayout>
 
+    <!--键盘-->
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/LinearLayout0"
+        android:layout_alignParentBottom="true"
         android:id="@+id/gridlt"
         android:rowCount="4"
         android:columnCount="4"
         >
-
     </GridLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/gridlt"
+        android:id="@+id/LinearLayout03" >
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape"
+            android:textSize="10pt"
+            android:textColor="@android:color/black"
+            android:text="@string/Backspace"
+            android:onClick="backGrid" />
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_shape"
+            android:textSize="10pt"
+            android:textColor="@android:color/black"
+            android:text="@string/Count"
+            android:onClick="getResult" />
+        <Button
+            android:id="@+id/cleardata"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape"
+            android:textSize="10pt"
+            android:textColor="@android:color/black"
+            android:text="@string/Reset"
+            android:onClick="clearData"/>
+    </LinearLayout>
+
+    <!--
     <TextView
-        android:id="@+id/powered"
+        android:id="@+id/copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="@string/Copyright"/>
+        -->
 </RelativeLayout>
