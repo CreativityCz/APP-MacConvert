@@ -2,7 +2,8 @@
     <string name="app_name">Mac</string>
 
     <string name="Copyright">Copyright@2015-2020 Yw,Cz</string>
-    <string name="action_settings">关于</string>
+    <string name="action_settings">设置</string>
+    <string name="version">版本</string>
 
     <string name="MacAddressStart">起始MAC地址</string>
     <string name="machineNum">机器数量</string>
@@ -14,4 +15,10 @@
     <string name="Backspace">退格</string>
     <string name="Count">计算</string>
     <string name="Reset">重置</string>
+
+
+    <string name="about">关于</string>
+    <string name="exit">退出</string>
+
+    <string name="allright">All Rights Reserved</string>
 </resources>

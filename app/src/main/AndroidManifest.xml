@@ -19,5 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--注意，每添加一个activity要在这里声明一下，要不然当intent调用这个activity的时候，app会报无响应然后挂掉-->
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/action_settings">
+
+        </activity>
+
+        <activity android:name=".VersionShowActivity"></activity>
+
     </application>
 </manifest>

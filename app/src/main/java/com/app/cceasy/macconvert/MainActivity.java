@@ -1,10 +1,15 @@
 package com.app.cceasy.macconvert;
 /**以后的大版本号更新基于以下需求，或重大bug
- * 需求：1、增加退格-----更改布局 ---OK--version 1.1  --2015-7-25
+ * 需求：1、增加退格-----更改布局 ---OK--version 1.1.1 --稳定版本--可投入使用 --2015-7-25---
  *      2、增加setting--右上角
+ *          改动：2.1退格、计算、重置三个按钮的android:layout_width="0dp" 设置为0dp， ok
+ *                    ---->那么Button的宽度就会按周围控件的比例进行自动适配，保证了键盘阵的均匀
+ *               2.2---已添加设置item
+ *               2.3---总共3个activity，测试无误--version 1.2 --稳定版本--可投入使用 --2015-7-25---
  *      3、增加分享------分享计算结果至QQ好友或电脑
  * */
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +29,9 @@ import java.lang.reflect.Method;
 
 
 public class MainActivity extends AppCompatActivity {
+    public final static String EXTRA_MESSAGE = "com.app.cceasy.MESSAGE";
+
+    public static MainActivity instance = null;
 
     GridLayout gridLayout;
     String [] strs = new String[]{
@@ -36,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        instance = this;
+
         setContentView(R.layout.activity_main);
 
         /**：
@@ -280,10 +290,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    // 在这个activity中判断是否有系统按键事件
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) { // 如果是手机上的返回键
+
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -296,6 +317,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,SettingActivity.class);
+            startActivity(intent);
             return true;
         }
 
