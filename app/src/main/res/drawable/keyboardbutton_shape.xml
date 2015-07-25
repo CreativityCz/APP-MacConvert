@@ -25,10 +25,12 @@
                 android:right="0dp"
                 android:bottom="0dp"
                 />
+            <!--
             <size
                 android:width="40dp"
                 android:height="20dp"
                 />
+                -->
             <stroke
                 android:width="2dp"
                 android:color="#878787"

@@ -39,7 +39,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/dr_edittext"
-                android:textCursorDrawable="@null"
+                android:textCursorDrawable="@drawable/cursor_color"
                 android:cursorVisible="true"
                 android:hint="@string/Pleaseinput" />
 
@@ -75,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/dr_edittext"
-                android:textCursorDrawable="@null"
+                android:textCursorDrawable="@drawable/cursor_color"
                 android:cursorVisible="true"
                 android:hint="@string/Pleaseinput" />
         </RelativeLayout>
@@ -101,7 +101,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/dr_edittext"
-                android:textCursorDrawable="@null"
+                android:textCursorDrawable="@drawable/cursor_color"
                 android:cursorVisible="true"
                 android:hint="@string/Pleaseinput"/>
         </RelativeLayout>
@@ -110,7 +110,7 @@
         <RelativeLayout
             android:id="@+id/line4"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_margin="5dp">
             <TextView
@@ -134,35 +134,32 @@
     </LinearLayout>
 
     <!--键盘-->
+    <!--最好的情况：宽度充满屏幕，且每个网格大小一致，但需要用到layout_columnweight，这是API2（android5.0）才有的-->
+    <!--所以，退而求其次，键盘每个按钮宽度在java文件中被固定下来，GridLayout的layout_width设置为="wrap_content
+        网格大小一致保证了，然后让GridLayout整体居中，一开始没想到，这个方法还是不错的，呵呵-->
     <GridLayout
-        android:layout_width="match_parent"
+        android:id="@+id/gridlt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:id="@+id/gridlt"
-        android:rowCount="4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:rowCount="5"
         android:columnCount="4"
         >
-    </GridLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/gridlt"
-        android:id="@+id/LinearLayout03" >
         <Button
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="fill"
             android:background="@drawable/button_shape"
             android:textSize="10pt"
             android:textColor="@android:color/black"
             android:text="@string/Backspace"
             android:onClick="backGrid" />
         <Button
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_weight="2"
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
             android:background="@drawable/button_shape"
             android:textSize="10pt"
             android:textColor="@android:color/black"
@@ -170,15 +167,15 @@
             android:onClick="getResult" />
         <Button
             android:id="@+id/cleardata"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_gravity="fill"
             android:background="@drawable/button_shape"
             android:textSize="10pt"
             android:textColor="@android:color/black"
             android:text="@string/Reset"
             android:onClick="clearData"/>
-    </LinearLayout>
+
+    </GridLayout>
+
 
     <!--
     <TextView

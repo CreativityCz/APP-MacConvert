@@ -102,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
             bn.setId(i);
             bn.setTextSize(20);
             bn.setBackgroundResource(R.drawable.keyboardbutton_shape);
-            bn.setWidth(175);
+            bn.setWidth(160);
+
             bn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -131,9 +132,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams(GridLayout.spec(i/4),GridLayout.spec(i%4));
+            //GridLayout.LayoutParams(第a行，第b列)
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams(GridLayout.spec(i/4+1),GridLayout.spec(i%4));
             params.setGravity(Gravity.FILL);
+
             //将键盘体填入网格布局
             gridLayout.addView(bn, params);
         }
