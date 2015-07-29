@@ -26,6 +26,7 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Method;
+import java.security.spec.ECField;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -61,13 +62,16 @@ public class MainActivity extends AppCompatActivity {
         EditText edit_text1 = (EditText) findViewById(R.id.edit_text1);
         EditText edit_text2 = (EditText) findViewById(R.id.edit_text2);
         EditText edit_text3 = (EditText) findViewById(R.id.edit_text3);
+        EditText result = (EditText) findViewById(R.id.textview_macEnd);
         //EditText屏蔽软键盘弹出--光标依然能闪动
         hideSoftInputMethod(edit_text1);
         hideSoftInputMethod(edit_text2);
         hideSoftInputMethod(edit_text3);
+        hideSoftInputMethod(result);
         //edit_text2、edit_text3 输入框只允许输入数字
         edit_text2.setInputType(InputType.TYPE_CLASS_NUMBER);
         edit_text3.setInputType(InputType.TYPE_CLASS_NUMBER);
+
         //EditText失去焦点时，马上去掉错误提示消息标志
         edit_text1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -127,18 +131,18 @@ public class MainActivity extends AppCompatActivity {
                     //
                     if (edit_text1.isFocused()) {
                         try {
+                            edit_text1.setError(null);//清除错误消息框
                             Long.parseLong(b.getText().toString(), 16);  //检查是否可转化为十六进制，即检查输入是否是十六进制数
                             edit_text1.append(b.getText());//内容追加
-                            edit_text1.setError(null);//清除错误消息框
                         } catch (Exception e) {
                             edit_text1.setError("请输入0~~F之内的十六进制数.");
                         }
                     }else if (edit_text2.isFocused()) {
-                        edit_text2.append(b.getText());
                         edit_text2.setError(null);
+                        edit_text2.append(b.getText());
                     } else if (edit_text3.isFocused()) {
-                        edit_text3.append(b.getText());
                         edit_text3.setError(null);
+                        edit_text3.append(b.getText());
                     }
                 }
             });
@@ -186,11 +190,12 @@ public class MainActivity extends AppCompatActivity {
         EditText edit_text1 = (EditText) findViewById(R.id.edit_text1);
         EditText edit_text2 = (EditText) findViewById(R.id.edit_text2);
         EditText edit_text3 = (EditText) findViewById(R.id.edit_text3);
-        TextView result = (TextView) findViewById(R.id.textview_macEnd);
+        TextView textview_macEnd = (TextView) findViewById(R.id.textview_macEnd);
         //清除错误消息框
         edit_text1.setError(null);
         edit_text2.setError(null);
         edit_text3.setError(null);
+        textview_macEnd.setError(null);
 
         //对所有输入框的文本内容进行检查--是否为空
         if("".equals(edit_text1.getText().toString())){
@@ -209,35 +214,37 @@ public class MainActivity extends AppCompatActivity {
             edit_text3.requestFocus();
             return;
         }
-        //对所有输入框的 文本内容 进行检查--内容是否合格
-        Long macStart;
-        Long num1;
-        Long num2;
+
+        //计算结果
+        String result = null;
         try{
-            macStart = Long.parseLong(edit_text1.getText().toString(),16);
+            Long macStart = Long.parseLong(edit_text1.getText().toString(),16);
+            Long num1 = Long.parseLong(edit_text2.getText().toString(),10);
+            Long num2 = Long.parseLong(edit_text3.getText().toString(),10);
+            result = Long.toHexString(macStart + num1 * num2 - 1);
         }catch (Exception e){
-            edit_text1.setError("输入有误:输入过多");
+            textview_macEnd.setError("无法计算.");
             return;
         }
 
-        try{
-            num1 = Long.parseLong(edit_text2.getText().toString(),10);
-        }catch (Exception e){
-            edit_text2.setError("输入有误：输入过多");
-            return;
-        }
-        try{
-            num2 = Long.parseLong(edit_text3.getText().toString(),10);
-        }catch (Exception e){
-            edit_text3.setError("输入有误：输入过多");
-            return;
-        }
-        //得出结果并打印
-        result.setTextSize(20);
-        result.setTextColor(Color.BLACK);
-        result.setText("0x" + Long.toHexString(macStart+num1*num2-1));
-        //result.setText(edit_text1.getText().toString()+edit_text2.getText().toString()+edit_text3.getText().toString());
+        //输出
+        textview_macEnd.setTextSize(20);
+        textview_macEnd.setTextColor(Color.BLACK);
+        textview_macEnd.setText(result);
 
+        //显示处理---Mac地址长度管理
+        macLengthManage(edit_text1,12);
+        macLengthManage(textview_macEnd,edit_text1.getText().length());
+    }
+
+    private void macLengthManage(TextView textView,int lengthPreset){
+        if(textView.getText().length()>lengthPreset){
+            textView.setError("Mac地址过长，当前长度："+textView.getText().length());
+        }
+
+        while (textView.getText().length() < lengthPreset){
+            textView.setText("0"+textView.getText().toString());
+        }
     }
 
     /**--------清空所有输入，清空计算结果、清空所有错误消息框 -----------*/
@@ -245,15 +252,16 @@ public class MainActivity extends AppCompatActivity {
         EditText edit_text1 = (EditText) findViewById(R.id.edit_text1);
         EditText edit_text2 = (EditText) findViewById(R.id.edit_text2);
         EditText edit_text3 = (EditText) findViewById(R.id.edit_text3);
-        TextView result = (TextView) findViewById(R.id.textview_macEnd);
+        TextView textview_macEnd = (TextView) findViewById(R.id.textview_macEnd);
         edit_text1.setText("");
         edit_text2.setText("");
         edit_text3.setText("");
-        result.setText("");
+        textview_macEnd.setText("");
 
         edit_text1.setError(null);
         edit_text2.setError(null);
         edit_text3.setError(null);
+        textview_macEnd.setError(null);
 
     }
 

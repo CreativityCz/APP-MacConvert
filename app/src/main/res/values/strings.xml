@@ -8,7 +8,7 @@
     <string name="MacAddressStart">起始MAC地址</string>
     <string name="machineNum">机器数量</string>
     <string name="macNumPerMachine">MAC步长</string>
-    <string name="MacAddressEnd">末端MAC地址</string>
+    <string name="MacAddressEnd">末端MAC地址:</string>
 
     <string name="Pleaseinput">请输入...</string>
 
