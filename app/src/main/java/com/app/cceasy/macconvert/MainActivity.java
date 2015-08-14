@@ -10,9 +10,11 @@ package com.app.cceasy.macconvert;
  * */
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -24,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Method;
 import java.security.spec.ECField;
@@ -31,6 +34,10 @@ import java.security.spec.ECField;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.app.cceasy.MESSAGE";
+    private String macStartPreToShare = null;
+    private String num1PreToShare;
+    private String num2PreToShare;
+    private String macEndPreToShare = null;
 
     public static MainActivity instance = null;
 
@@ -45,20 +52,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         instance = this;
 
-        setContentView(R.layout.activity_main);
-
-        /**：
-         * 1、EditText 输入框初始化
-         *      EditText屏蔽软键盘弹出--光标依然能闪动
-         *      edit_text2、edit_text3 输入框只允许输入数字
-         *      EditText失去焦点时，马上去掉错误提示消息标志
-         * 2、GridLayout网格布局 ：：将16个键盘button填入
-         */
-        //------------>
-
         /** ========EditText 输入框初始化 ===========*/
+        /**
+        * 1、EditText 输入框初始化
+        *  EditText屏蔽软键盘弹出--光标依然能闪动
+        *  edit_text2、edit_text3 输入框只允许输入数字
+        **/
         EditText edit_text1 = (EditText) findViewById(R.id.edit_text1);
         EditText edit_text2 = (EditText) findViewById(R.id.edit_text2);
         EditText edit_text3 = (EditText) findViewById(R.id.edit_text3);
@@ -67,11 +69,30 @@ public class MainActivity extends AppCompatActivity {
         hideSoftInputMethod(edit_text1);
         hideSoftInputMethod(edit_text2);
         hideSoftInputMethod(edit_text3);
-        hideSoftInputMethod(result);
+        //屏蔽软键盘弹出 - 光标不闪动
+        result.setInputType(InputType.TYPE_NULL);
         //edit_text2、edit_text3 输入框只允许输入数字
         edit_text2.setInputType(InputType.TYPE_CLASS_NUMBER);
         edit_text3.setInputType(InputType.TYPE_CLASS_NUMBER);
 
+        /**数据恢复--------------*/
+        SharedPreferences sharedPreferences = getSharedPreferences("mydata",MODE_PRIVATE);
+        macStartPreToShare = sharedPreferences.getString("macStartPreToShare","");
+        num1PreToShare = sharedPreferences.getString("num1PreToShare","");
+        num2PreToShare = sharedPreferences.getString("num2PreToShare","");
+        macEndPreToShare = sharedPreferences.getString("macEndPreToShare", "");
+        edit_text1.setText(macStartPreToShare);
+        edit_text2.setText(num1PreToShare);
+        edit_text3.setText(num2PreToShare);
+        result.setText(macEndPreToShare);
+        //Toast toast = Toast.makeText(this,"恢复完成.",Toast.LENGTH_SHORT);
+        //toast.setGravity(Gravity.CENTER, 0, 0);
+        //toast.show();
+        /**：
+         * 1、EditText失去焦点时，马上去掉错误提示消息标志
+         * 2、GridLayout网格布局 ：：将16个键盘button填入
+         */
+        //------------>
         //EditText失去焦点时，马上去掉错误提示消息标志
         edit_text1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -130,18 +151,40 @@ public class MainActivity extends AppCompatActivity {
                     //     将键入的内容追加给已获得焦点的EditText
                     //
                     if (edit_text1.isFocused()) {
-                        try {
-                            edit_text1.setError(null);//清除错误消息框
-                            Long.parseLong(b.getText().toString(), 16);  //检查是否可转化为十六进制，即检查输入是否是十六进制数
+                        edit_text1.setError(null);//清除错误消息框
+
+                        //光标处插入文字
+                        int index = edit_text1.getSelectionStart();
+                        if(index >= edit_text1.getText().length()){
                             edit_text1.append(b.getText());//内容追加
-                        } catch (Exception e) {
-                            edit_text1.setError("请输入0~~F之内的十六进制数.");
+                        }else {
+                            Editable editable = edit_text1.getEditableText();
+                            editable.insert(index,b.getText());
                         }
+
                     }else if (edit_text2.isFocused()) {
                         edit_text2.setError(null);
-                        edit_text2.append(b.getText());
+
+                        //光标处插入文字
+                        int index = edit_text2.getSelectionStart();
+                        if(index >= edit_text2.getText().length()){
+                            edit_text2.append(b.getText());//内容追加
+                        }else {
+                            Editable editable = edit_text2.getEditableText();
+                            editable.insert(index,b.getText());
+                        }
+
                     } else if (edit_text3.isFocused()) {
                         edit_text3.setError(null);
+
+                        //光标处插入文字
+                        int index = edit_text3.getSelectionStart();
+                        if(index >= edit_text3.getText().length()){
+                            edit_text3.append(b.getText());//内容追加
+                        }else {
+                            Editable editable = edit_text3.getEditableText();
+                            editable.insert(index,b.getText());
+                        }
                         edit_text3.append(b.getText());
                     }
                 }
@@ -190,25 +233,29 @@ public class MainActivity extends AppCompatActivity {
         EditText edit_text1 = (EditText) findViewById(R.id.edit_text1);
         EditText edit_text2 = (EditText) findViewById(R.id.edit_text2);
         EditText edit_text3 = (EditText) findViewById(R.id.edit_text3);
-        TextView textview_macEnd = (TextView) findViewById(R.id.textview_macEnd);
+        EditText textview_macEnd = (EditText) findViewById(R.id.textview_macEnd);
         //清除错误消息框
         edit_text1.setError(null);
         edit_text2.setError(null);
         edit_text3.setError(null);
         textview_macEnd.setError(null);
 
+        String macStartStr = edit_text1.getText().toString();
+        String num1str = edit_text2.getText().toString();
+        String num2str = edit_text3.getText().toString();
+
         //对所有输入框的文本内容进行检查--是否为空
-        if("".equals(edit_text1.getText().toString())){
+        if("".equals(macStartStr)){
             edit_text1.setError("请输入内容");
             //获取焦点--让用户可以直接输入---更加人性化
             edit_text1.requestFocus();
             return;
-        }else if("".equals(edit_text2.getText().toString())){
+        }else if("".equals(num1str)){
             edit_text2.setError("请输入内容");
             //获取焦点--让用户可以直接输入---更加人性化
             edit_text2.requestFocus();
             return;
-        }else if("".equals(edit_text3.getText().toString())){
+        }else if("".equals(num2str)){
             edit_text3.setError("请输入内容");
             //获取焦点--让用户可以直接输入---更加人性化
             edit_text3.requestFocus();
@@ -216,35 +263,61 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //计算结果
-        String result = null;
+        Long macStart;
+        Long num1;
+        Long num2;
+        String resultStr;
         try{
-            Long macStart = Long.parseLong(edit_text1.getText().toString(),16);
-            Long num1 = Long.parseLong(edit_text2.getText().toString(),10);
-            Long num2 = Long.parseLong(edit_text3.getText().toString(),10);
-            result = Long.toHexString(macStart + num1 * num2 - 1);
+            macStart = Long.parseLong(macStartStr,16);
+            num1 = Long.parseLong(num1str,10);
+            num2 = Long.parseLong(num2str,10);
+
+            resultStr = Long.toHexString(macStart + num1 * num2 - 1);
         }catch (Exception e){
-            textview_macEnd.setError("无法计算.");
+            Toast toast = Toast.makeText(this, "无法计算.", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
             return;
         }
 
+        //mac地址字符串长度整理
+        if("ERROR".equals(macStartStr = macStrLengthSet(macStartStr,12))){
+            return;
+        }
+        if ("ERROR".equals(resultStr = macStrLengthSet(resultStr,12))){
+            return;
+        }
         //输出
+        macStartPreToShare = macStartStr;
+        num1PreToShare = num1str;
+        num2PreToShare = num2str;
+        macEndPreToShare = resultStr;
+
+
+        //显示
         textview_macEnd.setTextSize(20);
         textview_macEnd.setTextColor(Color.BLACK);
-        textview_macEnd.setText(result);
+        textview_macEnd.setText(resultStr);
+        textview_macEnd.requestFocus();
 
-        //显示处理---Mac地址长度管理
-        macLengthManage(edit_text1,12);
-        macLengthManage(textview_macEnd,edit_text1.getText().length());
+        edit_text1.setText(macStartStr);
     }
 
-    private void macLengthManage(TextView textView,int lengthPreset){
-        if(textView.getText().length()>lengthPreset){
-            textView.setError("Mac地址过长，当前长度："+textView.getText().length());
-        }
 
-        while (textView.getText().length() < lengthPreset){
-            textView.setText("0"+textView.getText().toString());
+    public String macStrLengthSet(String str,int lengthPreset){
+        if(null == str) return null;
+        if(str.length() > lengthPreset){
+            Toast toast = Toast.makeText(this,"温馨提示：Mac地址长度已超过"+lengthPreset,Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            return "ERROR";
+        }else if (str.length() == lengthPreset){
+        }else {
+            while (str.length() < lengthPreset){
+                str = "0"+ str;
+            }
         }
+        return str;
     }
 
     /**--------清空所有输入，清空计算结果、清空所有错误消息框 -----------*/
@@ -262,6 +335,8 @@ public class MainActivity extends AppCompatActivity {
         edit_text2.setError(null);
         edit_text3.setError(null);
         textview_macEnd.setError(null);
+
+        edit_text1.requestFocus();
 
     }
 
@@ -328,8 +403,37 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this,SettingActivity.class);
             startActivity(intent);
             return true;
-        }
+        }else if(id == R.id.action_share){
+            String macStrShare = "0x"+macStartPreToShare+">>"+num1PreToShare+">>"+num2PreToShare+">>"+"0x"+macEndPreToShare;
+            if(null != macEndPreToShare){
+                Intent intent=new Intent(Intent.ACTION_SEND);
+
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+                intent.putExtra(Intent.EXTRA_TEXT, macStrShare);
+                intent.putExtra(Intent.EXTRA_TITLE, "我是标题");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(Intent.createChooser(intent, "请选择"));
+            }
+         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        SharedPreferences sharedPreferences = getSharedPreferences("mydata",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("macStartPreToShare",macStartPreToShare);
+        editor.putString("num1PreToShare",num1PreToShare);
+        editor.putString("num2PreToShare",num2PreToShare);
+        editor.putString("macEndPreToShare",macEndPreToShare);
+
+        editor.commit();
+
+        super.onDestroy();
     }
 }

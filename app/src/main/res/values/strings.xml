@@ -3,6 +3,7 @@
 
     <string name="Copyright">Copyright@2015-2020 Czhi, Ywen</string>
     <string name="action_settings">设置</string>
+    <string name="action_share">一键分享计算结果</string>
     <string name="version">版本</string>
 
     <string name="MacAddressStart">起始MAC地址</string>
