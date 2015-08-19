@@ -6,10 +6,10 @@
     <string name="action_share">一键分享计算结果</string>
     <string name="version">版本</string>
 
-    <string name="MacAddressStart">起始MAC地址</string>
+    <string name="MacAddressStart">起始MAC地址: 0x</string>
     <string name="machineNum">机器数量</string>
     <string name="macNumPerMachine">MAC步长</string>
-    <string name="MacAddressEnd">末端MAC地址:</string>
+    <string name="MacAddressEnd">末端MAC地址: 0x</string>
 
     <string name="Pleaseinput">请输入...</string>
 

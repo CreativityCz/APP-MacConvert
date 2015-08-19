@@ -4,142 +4,101 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp" >
 
-
-
-    <!--线性布局-垂直：共4行 -->
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:id="@+id/LinearLayout0"
-        >
-        <!--第1行 -->
-        <RelativeLayout
-            android:id="@+id/line1"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_margin="5dp"
-            android:weightSum="1">
+        android:layout_height="180dp"
+        android:layout_margin="5dp">
+        <!--第1列 -->
+        <LinearLayout
+            android:id="@+id/id_col_1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
             <TextView
                 android:id="@+id/macstart"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textSize="10pt"
-                android:text="@string/MacAddressStart"
-                android:layout_gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:textSize="9pt"
+                android:text="@string/MacAddressStart" />
+            <TextView
+                android:id="@+id/machineNum"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="9pt"
+                android:text="@string/machineNum"/>
+            <TextView
+                android:id="@+id/macNumPerMachine"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="9pt"
+                android:text="@string/macNumPerMachine"/>
+
+            <TextView
+                android:id="@+id/MacAddressEnd"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="9pt"
+                android:text="@string/MacAddressEnd"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_col_2"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
 
             <EditText
                 android:id="@+id/edit_text1"
-                android:layout_width="180dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:background="@drawable/dr_edittext"
                 android:textCursorDrawable="@drawable/cursor_color"
                 android:cursorVisible="true"
                 android:hint="@string/Pleaseinput" />
-
-            <TextView
-                android:id="@+id/zerox"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_toLeftOf="@id/edit_text1"
-                android:layout_centerVertical="true"
-                android:textSize="10pt"
-                android:text="0x"/>
-        </RelativeLayout>
-        <!--第2行 -->
-        <!--用相对布局，可以让里面的控件，一个靠左，一个靠右
-            而线性布局里面的控件要么只能全部靠左，要么只能全部靠右-->
-        <RelativeLayout
-            android:id="@+id/line2"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_margin="5dp" >
-            <TextView
-                android:id="@+id/machineNum"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textSize="10pt"
-                android:text="@string/machineNum"/>
             <EditText
                 android:id="@+id/edit_text2"
-                android:layout_width="180dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:background="@drawable/dr_edittext"
                 android:textCursorDrawable="@drawable/cursor_color"
                 android:cursorVisible="true"
                 android:hint="@string/Pleaseinput" />
-        </RelativeLayout>
 
-        <!--第3行 -->
-        <RelativeLayout
-            android:id="@+id/line3"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_margin="5dp" >
-            <TextView
-                android:id="@+id/macNumPerMachine"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textSize="10pt"
-                android:text="@string/macNumPerMachine"/>
             <EditText
                 android:id="@+id/edit_text3"
-                android:layout_width="180dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:background="@drawable/dr_edittext"
                 android:textCursorDrawable="@drawable/cursor_color"
                 android:cursorVisible="true"
-                android:hint="@string/Pleaseinput"/>
-        </RelativeLayout>
-
-        <!--第4行 -->
-        <RelativeLayout
-            android:id="@+id/line4"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_margin="5dp">
-            <TextView
-                android:id="@+id/MacAddressEnd"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textSize="10pt"
-                android:text="@string/MacAddressEnd"  />
-
-
+                android:hint="@string/Pleaseinput" />
             <EditText
                 android:id="@+id/textview_macEnd"
-                android:layout_width="180dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/dr_edittext"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:gravity="center_vertical"
                 android:hint="" />
-            <TextView
-                android:id="@+id/zerox1"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_toLeftOf="@id/textview_macEnd"
-                android:layout_centerVertical="true"
-                android:textSize="10pt"
-                android:text="0x"/>
-        </RelativeLayout >
+
+        </LinearLayout>
     </LinearLayout>
+
+
 
     <!--键盘-->
     <!--最好的情况：宽度充满屏幕，且每个网格大小一致，但需要用到layout_columnweight，这是API2（android5.0）才有的-->
