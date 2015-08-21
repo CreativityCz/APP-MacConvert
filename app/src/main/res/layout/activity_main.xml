@@ -22,7 +22,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:gravity="center_vertical"
-                android:textSize="9pt"
+                android:textSize="@dimen/abc_text_size_title_material"
                 android:text="@string/MacAddressStart" />
             <TextView
                 android:id="@+id/machineNum"
@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:gravity="center_vertical"
-                android:textSize="9pt"
+                android:textSize="@dimen/abc_text_size_title_material"
                 android:text="@string/machineNum"/>
             <TextView
                 android:id="@+id/macNumPerMachine"
@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:gravity="center_vertical"
-                android:textSize="9pt"
+                android:textSize="@dimen/abc_text_size_title_material"
                 android:text="@string/macNumPerMachine"/>
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:gravity="center_vertical"
-                android:textSize="9pt"
+                android:textSize="@dimen/abc_text_size_title_material"
                 android:text="@string/MacAddressEnd"  />
 
         </LinearLayout>
